@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jiao Sushi | Pedir</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="./script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <section class="section">
+      <div class="form-pedido-layout">
+        <div class="order-form">
+          <input type="text" id="nombre" placeholder="Nombre *" />
+          <input type="text" id="direccion" placeholder="Dirección *" />
+          <input
+            type="text"
+            id="nombreDeLaCasa"
+            placeholder="Nombre de la casa, apartamento, etc. *"
+          />
+          <input type="text" id="mensaje" placeholder="Mensaje" />
+        </div>
+
+        <div class="pedido-lista">
+          <h3>Pedido</h3>
+          <ul id="lista-pedido"></ul>
+          <div class="order-form">
+            <select id="sushi">
+              <option value="Maki de Salmón (8u)">Maki de Salmón (8u)</option>
+              <option value="California (8u)">California (8u)</option>
+              <option value="Nigiri de Salmón (4u)">
+                Nigiri de Salmón (4u)
+              </option>
+            </select>
+            <button onclick="agregarAlPedido()" class="black-btn">
+              Agregar
+            </button>
+          </div>
+        </div>
+
+        <button onclick="enviarWpp()" class="black-btn">Enviar</button>
+      </div>
+    </section>
+
+    <div id="footer"></div>
+  </body>
+</html>
