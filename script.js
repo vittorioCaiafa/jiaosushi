@@ -57,9 +57,7 @@ function enviarWpp() {
     `*Dirección:* ${direccion}%0A` +
     `*Casa/Apto:* ${casa}%0A` +
     `*Mensaje:* ${mensajeExtra}%0A%0A` +
-    `*Pedido:*%0A` +
-    `*${document.getElementById("lista-pedido").innerText}*%0A` +
-    `*Total:* $${document.getElementById("total").innerText}`;
+    `*Pedido:* _en proceso de desarrollo_`;
   const numero = "59899187886";
   const url = `https://wa.me/${numero}?text=${mensaje}`;
   window.open(url, "_blank");
