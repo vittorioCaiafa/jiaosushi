@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jiao Sushi | Pedir</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./scripts/app.js" defer></script>
+    <script type="module" src="./scripts/whatsapp.js" defer></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <section class="section">
+      <div class="form-pedido-layout">
+        <div class="order-form">
+          <input type="text" id="nombre" placeholder="Nombre *" />
+          <input type="text" id="direccion" placeholder="Dirección *" />
+          <input
+            type="text"
+            id="nombreDeLaCasa"
+            placeholder="Nombre de la casa, apartamento, etc. *"
+          />
+          <input type="text" id="mensaje" placeholder="Mensaje" />
+        </div>
+
+        <div class="pedido-lista">
+          <h3>Pedido</h3>
+          <ul id="lista-pedido"></ul>
+          <p id="total-pedido">
+            <b>Total:</b> $<span id="valor-total">0</span>
+          </p>
+        </div>
+
+        <button id="btn-enviar" class="black-btn">Enviar</button>
+      </div>
+    </section>
+
+    <div id="footer"></div>
+  </body>
+</html>
