@@ -20,7 +20,7 @@ export function renderizarMenu() {
         );
 
         fila.innerHTML = `
-          <td><img src="${producto.imagen}" class="menu-img" type="png"/></td>
+          <td><img src="${window.location.origin}/${producto.imagen}" class="menu-img" type="png"/></td>
           <td><p><b>${producto.nombre}</b> (${producto.unidades}u)</p><p class="menu-item-descrip">${producto.descripcion}</p></td>
           <td>$${producto.precio}</td>
           <td>${counterHTMLConID}</td>
