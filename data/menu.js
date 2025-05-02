@@ -12,7 +12,7 @@ export function renderizarMenu() {
     .then((response) => response.text())
     .then((counterHtml) => {
       for (let i = 0; i < menuList.length; i++) {
-        const producto = new menuList[i]();
+        const producto = menuItems[i];
         const fila = document.createElement("tr");
         const counterHTMLConID = counterHtml.replace(
           'data-id=""',
