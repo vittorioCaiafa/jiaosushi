@@ -182,7 +182,7 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../utils/images/background.jpg");
+  background-image: url("./utils/images/background.jpg");
   background-size: cover; /* Cubre toda la pantalla */
   background-position: center; /* Centrado */
   background-repeat: no-repeat;
