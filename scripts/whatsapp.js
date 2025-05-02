@@ -33,7 +33,7 @@ export function enviarWpp() {
     const producto = menuItems.find((p) => String(p.id) === String(id)); // Convertir a string para la comparación
     if (producto) {
       const subtotal = producto.precio * cantidad;
-      pedido += `${producto.nombre} x${cantidad} - $${subtotal}\n`;
+      pedido += `* ${producto.nombre} x${cantidad} - $${subtotal}\n`;
     }
   });
 
