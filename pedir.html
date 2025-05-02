@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jiao Sushi | Pedir</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="./script.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./scripts/app.js" defer></script>
+    <script type="module" src="./scripts/whatsapp.js" defer></script>
   </head>
   <body>
     <div id="navbar"></div>
@@ -27,21 +27,12 @@
         <div class="pedido-lista">
           <h3>Pedido</h3>
           <ul id="lista-pedido"></ul>
-          <div class="order-form">
-            <select id="sushi">
-              <option value="Maki de Salmón (8u)">Maki de Salmón (8u)</option>
-              <option value="California (8u)">California (8u)</option>
-              <option value="Nigiri de Salmón (4u)">
-                Nigiri de Salmón (4u)
-              </option>
-            </select>
-            <button onclick="agregarAlPedido()" class="black-btn">
-              Agregar
-            </button>
-          </div>
+          <p id="total-pedido">
+            <b>Total:</b> $<span id="valor-total">0</span>
+          </p>
         </div>
 
-        <button onclick="enviarWpp()" class="black-btn">Enviar</button>
+        <button id="btn-enviar" class="black-btn">Enviar</button>
       </div>
     </section>
 

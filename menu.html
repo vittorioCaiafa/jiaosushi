@@ -4,50 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jiao Sushi | Menú</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./scripts/app.js" defer></script>
   </head>
   <body>
     <div id="navbar"></div>
 
     <section class="section">
       <h2>Menú</h2>
-
-      <table class="menu-table">
-        <tbody>
-          <tr>
-            <td>
-              <img src="utils/images/salmon-maki.png" class="menu-img" />
-            </td>
-            <td>
-              <p><b>Maki de Salmón</b> (8u)</p>
-              <p class="menu-item-descrip">Salmón, palta, queso crema</p>
-            </td>
-            <td>$400</td>
-          </tr>
-          <tr>
-            <td>
-              <img src="utils/images/california.png" class="menu-img" />
-            </td>
-            <td>
-              <p><b>California</b> (8u)</p>
-              <p class="menu-item-descrip">
-                Cangrejo, palta, pepino, queso crema
-              </p>
-            </td>
-            <td>$500</td>
-          </tr>
-          <tr>
-            <td>
-              <img src="utils/images/salmon-nigiri.png" class="menu-img" />
-            </td>
-            <td>
-              <p><b>Nigiri de Salmón</b> (4u)</p>
-              <p class="menu-item-descrip">Salmón</p>
-            </td>
-            <td>$200</td>
-          </tr>
-        </tbody>
+      <table id="menu-table" class="menu-table">
+        <tbody id="menu-body"></tbody>
       </table>
     </section>
 
