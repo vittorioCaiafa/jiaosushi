@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,10 +7,14 @@
 }
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Montserrat", sans-serif;
+
+
+
   background-color: #ffffff;
-  color: #000000;
+  color: #ffffff; /* Mejor contraste que blanco sobre blanco */
 }
+
 
 nav {
   display: flex;
@@ -35,8 +41,8 @@ nav {
 .nav-links a {
   text-decoration: none;
   color: #beb1a4;
-  font-size: 16px;
-  padding: 10px 0;
+  font-size: 25px;
+  padding: 10px 10px;
   display: inline-block;
   transition: color 0.3s;
 }
@@ -100,6 +106,21 @@ html {
 
 .black-btn:hover {
   background-color: #323232;
+}
+
+.white-btn {
+  display: inline-block;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 15px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: background 0.3s;
+}
+
+.white-btn:hover {
+  background-color: #e7e7e7;
 }
 
 .green-btn {
@@ -177,18 +198,20 @@ h2 {
 }
 
 .background-image {
-  position: fixed; /* Se queda fijo detrás */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("./utils/images/background.jpg");
-  background-size: cover; /* Cubre toda la pantalla */
-  background-position: center; /* Centrado */
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+    url("./utils/images/background.jpg");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.3; /* Transparencia, ajusta el valor */
-  z-index: -1; /* Se pone detrás de todo */
+  z-index: -1;
 }
+
 
 /* Estética moderna y limpia para el formulario y carrito */
 
@@ -315,5 +338,46 @@ h2 {
   .order-form,
   .pedido-lista {
     width: 100%;
+  }
+}
+
+.word-carousel-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px 0;
+  overflow: hidden;
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 60px;
+  animation: scroll 15s linear infinite;
+}
+
+.carousel-card {
+  flex: 0 0 auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 20px;
+  padding: 20px 40px;
+  font-size: 30px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Animación de desplazamiento */
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }

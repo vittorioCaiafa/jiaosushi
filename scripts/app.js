@@ -25,3 +25,9 @@ function loadComponent(id, file) {
       console.error(`Error al cargar ${file}:`, error);
     });
 }
+
+// app.js
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("carouselTrack");
+  track.innerHTML += track.innerHTML; // Duplica los elementos para scroll infinito
+});
