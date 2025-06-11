@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 * {
   margin: 0;
@@ -9,12 +9,9 @@
 body {
   font-family: "Montserrat", sans-serif;
 
-
-
   background-color: #ffffff;
   color: #ffffff; /* Mejor contraste que blanco sobre blanco */
 }
-
 
 nav {
   display: flex;
@@ -171,13 +168,15 @@ footer {
 .menu-table th,
 .menu-table td {
   padding: 15px;
-  text-align: left; /* El texto queda alineado a la izquierda */
+  text-align: left;
   border-bottom: 1px solid #ddd;
+  color: #000000;
 }
 
 .menu-table th {
   background-color: #f8f8f8;
   font-weight: bold;
+  color: #000000;
 }
 
 .menu-table tr:hover {
@@ -187,7 +186,7 @@ footer {
 
 .menu-item-descrip {
   margin-top: 5px;
-  color: #929292;
+  color: #000000;
 }
 
 h2 {
@@ -203,15 +202,13 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("./utils/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
 }
-
 
 /* Estética moderna y limpia para el formulario y carrito */
 
