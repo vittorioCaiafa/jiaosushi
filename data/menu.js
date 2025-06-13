@@ -8,33 +8,46 @@ export const menuList = [SalmonMaki, California, SalmonNigiri];
 export const menuItems = menuList.map((Cls) => new Cls());
 
 export function renderizarMenu() {
-  fetch("./components/counter-input.html")
-    .then((response) => response.text())
-    .then((counterHtml) => {
-      for (let i = 0; i < menuList.length; i++) {
-        const producto = menuItems[i];
-        const fila = document.createElement("tr");
-        const counterHTMLConID = counterHtml.replace(
-          'data-id=""',
-          `data-id="${producto.id}"`
-        );
+  const menuGrid = document.getElementById("menuGrid");
+  if (!menuGrid) {
+    console.error("Menu grid container not found");
+    return;
+  }
 
-        fila.innerHTML = `
-          <td><img src="./jiaosushi/${producto.imagen}" class="menu-img" type="png"/></td>
-          <td><p><b>${producto.nombre}</b> (${producto.unidades}u)</p><p class="menu-item-descrip">${producto.descripcion}</p></td>
-          <td>$${producto.precio}</td>
-          <td>${counterHTMLConID}</td>
-        `;
+  // Clear the grid before adding new elements
+  menuGrid.innerHTML = '';
 
-        document.getElementById("menu-body").appendChild(fila);
-      }
+  menuItems.forEach((producto) => {
+    const card = document.createElement("div");
+    card.className = "menu-card";
+    
+    card.innerHTML = `
+      <div class="menu-card-image">
+        <img src="${producto.imagen}" alt="${producto.nombre}" />
+      </div>
+      <div class="menu-card-content">
+        <h3>${producto.nombre}</h3>
+        <p class="menu-item-descrip">${producto.descripcion}</p>
+        <p class="menu-item-units">${producto.unidades} unidades</p>
+        <div class="menu-card-footer">
+          <span class="price">$${producto.precio}</span>
+          <div class="counter" data-id="${producto.id}">
+            <button class="counter-btn" data-decrement>-</button>
+            <span class="counter-value" data-value>0</span>
+            <button class="counter-btn" data-increment>+</button>
+          </div>
+        </div>
+      </div>
+    `;
 
-      inicializarContadores();
-    });
+    menuGrid.appendChild(card);
+  });
+
+  inicializarContadores();
 }
 
 function inicializarContadores() {
-  const counters = document.querySelectorAll("[data-counter]");
+  const counters = document.querySelectorAll(".counter");
   const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
   counters.forEach((counter) => {
