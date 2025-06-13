@@ -153,7 +153,7 @@ async function loadComponents() {
     // Cargar navbar
     const navbarContainer = document.getElementById('navbar');
     if (navbarContainer) {
-      const response = await fetch('./components/navbar.html');
+      const response = await fetch('/jiaosushi/components/navbar.html');
       const html = await response.text();
       navbarContainer.innerHTML = html;
     }
@@ -161,7 +161,7 @@ async function loadComponents() {
     // Cargar footer
     const footerContainer = document.getElementById('footer');
     if (footerContainer) {
-      const response = await fetch('./components/footer.html');
+      const response = await fetch('/jiaosushi/components/footer.html');
       const html = await response.text();
       footerContainer.innerHTML = html;
     }
@@ -169,7 +169,7 @@ async function loadComponents() {
     // Cargar botón de mensaje
     const messageButtonContainer = document.getElementById('message-button');
     if (messageButtonContainer) {
-      const response = await fetch('./components/message-button.html');
+      const response = await fetch('/jiaosushi/components/message-button.html');
       const html = await response.text();
       messageButtonContainer.innerHTML = html;
     }
