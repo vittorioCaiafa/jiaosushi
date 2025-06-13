@@ -4,6 +4,7 @@ import { mostrarTotal, mostrarCarrito } from "./carrito.js";
 // Función para cargar componentes
 async function loadComponent(elementId, componentPath) {
   try {
+    console.log(`Loading component: ${componentPath}`);
     const response = await fetch(componentPath);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -12,6 +13,7 @@ async function loadComponent(elementId, componentPath) {
     const element = document.getElementById(elementId);
     if (element) {
       element.innerHTML = html;
+      console.log(`Successfully loaded component: ${componentPath}`);
     } else {
       console.error(`Element with id ${elementId} not found`);
     }
@@ -21,28 +23,38 @@ async function loadComponent(elementId, componentPath) {
 }
 
 // Cargar todos los componentes cuando el DOM esté listo
-window.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("DOM Content Loaded - Starting component loading");
+  
   // Cargar componentes comunes
-  await Promise.all([
-    loadComponent("navbar", "./components/navbar.html"),
-    loadComponent("hero", "./components/hero.html"),
-    loadComponent("characteristics", "./components/characteristics.html"),
-    loadComponent("comments", "./components/comments.html"),
-    loadComponent("footer", "./components/footer.html")
-  ]);
+  try {
+    await Promise.all([
+      loadComponent("navbar", "./components/navbar.html"),
+      loadComponent("hero", "./components/hero.html"),
+      loadComponent("characteristics", "./components/characteristics.html"),
+      loadComponent("comments", "./components/comments.html"),
+      loadComponent("footer", "./components/footer.html")
+    ]);
+    console.log("All components loaded successfully");
+  } catch (error) {
+    console.error("Error loading components:", error);
+  }
 
   // Inicializar carrusel
   const track = document.getElementById("carouselTrack");
   if (track) {
+    console.log("Initializing carousel");
     track.innerHTML += track.innerHTML; // Duplica los elementos para scroll infinito
   }
 
   // Cargar componentes específicos de página
   if (window.location.pathname.includes("menu.html")) {
+    console.log("Loading menu page components");
     renderizarMenu();
   }
 
   if (window.location.pathname.includes("pedir.html")) {
+    console.log("Loading pedir page components");
     mostrarCarrito();
     mostrarTotal();
   }
