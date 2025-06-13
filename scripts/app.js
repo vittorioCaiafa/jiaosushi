@@ -14,6 +14,15 @@ async function loadComponent(elementId, componentPath) {
     if (element) {
       element.innerHTML = html;
       console.log(`Successfully loaded component: ${componentPath}`);
+      
+      // Inicializar carrusel después de cargar el componente characteristics
+      if (elementId === 'characteristics') {
+        const track = document.getElementById("carouselTrack");
+        if (track) {
+          console.log("Initializing carousel");
+          track.innerHTML += track.innerHTML; // Duplica los elementos para scroll infinito
+        }
+      }
     } else {
       console.error(`Element with id ${elementId} not found`);
     }
@@ -38,13 +47,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("All components loaded successfully");
   } catch (error) {
     console.error("Error loading components:", error);
-  }
-
-  // Inicializar carrusel
-  const track = document.getElementById("carouselTrack");
-  if (track) {
-    console.log("Initializing carousel");
-    track.innerHTML += track.innerHTML; // Duplica los elementos para scroll infinito
   }
 
   // Cargar componentes específicos de página
