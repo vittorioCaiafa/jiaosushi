@@ -8,9 +8,10 @@
 
 body {
   font-family: "Montserrat", sans-serif;
-
-  background-color: #ffffff;
-  color: #ffffff; /* Mejor contraste que blanco sobre blanco */
+  background-color: white;
+  color: #000000; /* Mejor contraste que blanco sobre blanco */
+  min-height: 100vh;
+  position: relative;
 }
 
 nav {
@@ -129,6 +130,8 @@ html {
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 40px 0;
+  min-width: 300px;
+  text-align: center;
 }
 
 .black-btn:hover {
@@ -194,6 +197,7 @@ footer {
   margin-top: 20px;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  table-layout: fixed;
 }
 
 .menu-table td img {
@@ -202,6 +206,7 @@ footer {
   margin-right: auto;
   width: 100px;
   height: 100px;
+  object-fit: cover;
 }
 
 /* Para los td y th normales */
@@ -211,6 +216,9 @@ footer {
   text-align: left;
   border-bottom: 1px solid #ddd;
   color: #000000;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .menu-table th {
@@ -227,6 +235,10 @@ footer {
 .menu-item-descrip {
   margin-top: 5px;
   color: #000000;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 h2 {
@@ -242,32 +254,21 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("./utils/images/background.jpg");
+  background-image: url("./utils/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0.15;
   z-index: -1;
-  animation: zoomIn 20s ease infinite alternate;
-}
-
-@keyframes zoomIn {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
 }
 
 /* Estética moderna y limpia para el formulario y carrito */
 
 .form-pedido-layout {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   gap: 40px;
-  flex-wrap: wrap;
   background: rgba(255, 255, 255, 0.75);
   padding: 40px;
   border-radius: 20px;
@@ -280,8 +281,8 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex: 1;
-  min-width: 280px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .order-form input,
@@ -306,9 +307,8 @@ h2 {
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   color: #333;
-  min-width: 280px;
-  max-width: 350px;
-  flex: 1;
+  width: 100%;
+  max-width: 500px;
 }
 
 .pedido-lista h3 {
@@ -330,6 +330,12 @@ h2 {
   border-left: 4px solid #ded9bc;
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+#btn-enviar {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
 }
 
 /* Mejorar el botón */
@@ -384,21 +390,29 @@ h2 {
   }
 
   .order-form,
-  .pedido-lista {
+  .pedido-lista,
+  #btn-enviar {
     width: 100%;
-    min-width: auto;
+    max-width: none;
   }
 
   .menu-table {
     display: block;
     overflow-x: auto;
-    white-space: nowrap;
+    white-space: normal;
     margin: 0 10px;
   }
 
   .menu-table td img {
     width: 80px;
     height: 80px;
+  }
+
+  .menu-table th,
+  .menu-table td {
+    padding: 10px;
+    white-space: normal;
+    word-wrap: break-word;
   }
 
   .nav-links {
@@ -443,6 +457,13 @@ h2 {
     padding: 12px 25px;
     font-size: 16px;
   }
+
+  .black-btn {
+    padding: 15px 30px;
+    font-size: 20px;
+    min-width: auto;
+    width: 100%;
+  }
 }
 
 /* Mobile-specific styles */
@@ -470,6 +491,8 @@ h2 {
     text-align: center;
     padding: 10px 0;
     border: none;
+    white-space: normal;
+    word-wrap: break-word;
   }
 
   .menu-table td:first-child {
@@ -484,15 +507,18 @@ h2 {
 
   .menu-table td p {
     margin: 5px 0;
+    white-space: normal;
+    word-wrap: break-word;
   }
 
   .menu-table td p:first-child {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
   }
 
   .menu-item-descrip {
     font-size: 12px;
+    line-height: 1.3;
   }
 
   .menu-table td:nth-child(3) {
@@ -596,9 +622,9 @@ footer {
 }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 .word-carousel-section {
@@ -649,13 +675,13 @@ body {
 }
 
 .carousel-card:nth-child(2n) {
-  background: linear-gradient(135deg, #4ecdc4, #45b7af);
+  background: linear-gradient(135deg, #63cd4e, #7eb745);
   transform: translateY(0) rotate(2deg);
   box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
 }
 
 .carousel-card:nth-child(3n) {
-  background: linear-gradient(135deg, #ffd93d, #ffc107);
+  background: linear-gradient(135deg, #ffff92, #f6f08b);
   transform: translateY(0) rotate(-1deg);
   box-shadow: 0 8px 20px rgba(255, 217, 61, 0.3);
 }
@@ -845,5 +871,340 @@ footer {
 
   .social-links {
     justify-content: center;
+  }
+}
+
+.menu-table td p {
+  margin: 5px 0;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.menu-table td p:first-child {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.menu-item-descrip {
+  font-size: 14px;
+  color: #666666;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .menu-table td p:first-child {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .menu-item-descrip {
+    font-size: 13px;
+  }
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 480px) {
+  .menu-table td p:first-child {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .menu-item-descrip {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+}
+
+/* Menu Section */
+.menu-section {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  color: var(--text-color);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.menu-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.menu-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.menu-card h3 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.menu-card p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.menu-card .price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .menu-card {
+    padding: 15px;
+  }
+
+  .menu-card img {
+    height: 180px;
+  }
+
+  .menu-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .menu-card p {
+    font-size: 0.9rem;
+  }
+
+  .menu-card .price {
+    font-size: 1.1rem;
+  }
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: #000000;
+  text-shadow: none;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #000000;
+  text-shadow: none;
+}
+
+/* Floating Message Button */
+.floating-message {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-message:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.floating-message img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .floating-message {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .floating-message img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Chat Modal */
+.chat-modal {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 350px;
+  height: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.chat-modal.active {
+  display: block;
+}
+
+.chat-modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-header {
+  background: #000;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.close-chat {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-bottom: 5px;
+}
+
+.message.user {
+  background: #e9ecef;
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+}
+
+.message.bot {
+  background: #000;
+  color: white;
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+}
+
+.chat-input-container {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input-container input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.chat-input-container input:focus {
+  border-color: #000;
+}
+
+.send-btn {
+  background: #000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+  background: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chat-modal {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
   }
 }
