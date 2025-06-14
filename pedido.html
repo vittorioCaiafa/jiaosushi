@@ -5,14 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jiao Sushi | Pedido</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script type="module">
-      import { mostrarCarrito, mostrarTotal } from "./scripts/carrito.js";
-      
-      document.addEventListener('DOMContentLoaded', () => {
-        mostrarCarrito(); // Mostrar el carrito y el total
-        mostrarTotal(); // Actualizar el total
-      });
-    </script>
+    <script type="module" src="./scripts/app.js" defer></script>
   </head>
   <body>
     <div class="background-image"></div>
@@ -56,7 +49,5 @@
     <div id="footer"></div>
     <div id="message-button"></div>
     <div id="chat-modal"></div>
-
-    <script type="module" src="./scripts/app.js" defer></script>
   </body>
 </html> 

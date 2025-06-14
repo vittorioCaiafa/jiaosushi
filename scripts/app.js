@@ -7,7 +7,6 @@ function getBasePath() {
   if (window.location.hostname === 'vittoriocaiafa.github.io') {
     return '/jiaosushi/';
   }
-  // Si estamos en localhost (Go Live), usamos la ruta relativa
   return './';
 }
 
@@ -41,10 +40,47 @@ async function loadComponent(elementId, componentPath) {
   }
 }
 
+// Function to get cart from localStorage
+function getCart() {
+  const cart = localStorage.getItem('sushiCart');
+  return cart ? JSON.parse(cart) : [];
+}
+
+// Function to save cart to localStorage
+function saveCart(cart) {
+  localStorage.setItem('sushiCart', JSON.stringify(cart));
+}
+
+function updateCartItem(id, amount) {
+  let cart = getCart();
+  const existingItem = cart.find(item => item.id === id);
+  
+  if (existingItem) {
+    if (amount === 0) {
+      // Remove item if amount is 0
+      cart = cart.filter(item => item.id !== id);
+    } else {
+      // Update existing item
+      existingItem.amount = amount;
+    }
+  } else if (amount > 0) {
+    // Add new item
+    cart.push({ id, amount });
+  }
+  
+  saveCart(cart);
+}
+
+// Function to get item amount from cart
+function getItemAmount(id) {
+  const cart = getCart();
+  const item = cart.find(item => item.id === id);
+  return item ? item.amount : 0;
+}
+
 // Función para cargar el menú
 async function loadMenu() {
   try {
-    console.log("loadMenu function called");
     const menuGrid = document.getElementById("menuGrid");
     if (!menuGrid) {
       console.error("Menu grid container not found");
@@ -69,7 +105,7 @@ async function loadMenu() {
             <div class="menu-card-footer">
               <div class="counter">
                 <button class="counter-btn minus" data-id="${item.id}">-</button>
-                <span class="counter-value" data-id="${item.id}">0</span>
+                <span class="counter-value" data-id="${item.id}">${getItemAmount(item.id)}</span>
                 <button class="counter-btn plus" data-id="${item.id}">+</button>
               </div>
             </div>
@@ -85,25 +121,25 @@ async function loadMenu() {
 
     minusButtons.forEach(button => {
       button.addEventListener('click', () => {
-        const id = button.dataset.id;
+        const id = parseInt(button.dataset.id);
         const valueElement = document.querySelector(`.counter-value[data-id="${id}"]`);
         let value = parseInt(valueElement.textContent);
         if (value > 0) {
           value--;
           valueElement.textContent = value;
-          updateCart(id, value);
+          updateCartItem(id, value);
         }
       });
     });
 
     plusButtons.forEach(button => {
       button.addEventListener('click', () => {
-        const id = button.dataset.id;
+        const id = parseInt(button.dataset.id);
         const valueElement = document.querySelector(`.counter-value[data-id="${id}"]`);
         let value = parseInt(valueElement.textContent);
         value++;
         valueElement.textContent = value;
-        updateCart(id, value);
+        updateCartItem(id, value);
       });
     });
 
@@ -195,39 +231,6 @@ async function initializeChat() {
   }
 }
 
-async function loadComponents() {
-  try {
-    // Cargar navbar
-    const navbarContainer = document.getElementById('navbar');
-    if (navbarContainer) {
-      const response = await fetch('/jiaosushi/components/navbar.html');
-      const html = await response.text();
-      navbarContainer.innerHTML = html;
-    }
-
-    // Cargar footer
-    const footerContainer = document.getElementById('footer');
-    if (footerContainer) {
-      const response = await fetch('/jiaosushi/components/footer.html');
-      const html = await response.text();
-      footerContainer.innerHTML = html;
-    }
-
-    // Cargar botón de mensaje
-    const messageButtonContainer = document.getElementById('message-button');
-    if (messageButtonContainer) {
-      const response = await fetch('/jiaosushi/components/message-button.html');
-      const html = await response.text();
-      messageButtonContainer.innerHTML = html;
-    }
-
-    // Inicializar el chat
-    initializeChat();
-  } catch (error) {
-    console.error('Error loading components:', error);
-  }
-}
-
 // Cargar todos los componentes cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -253,6 +256,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (window.location.pathname.includes("menu.html")) {
       console.log("Loading menu page...");
       await loadMenu();
+    }
+
+    // Mostrar el carrito si estamos en la página de pedido
+    if (window.location.pathname.includes("pedido.html")) {
+      console.log("Loading order page...");
+      const { mostrarCarrito, mostrarTotal } = await import("./carrito.js");
+      // Esperar a que el DOM esté completamente cargado
+      setTimeout(() => {
+        mostrarCarrito();
+        mostrarTotal();
+      }, 100);
     }
 
     // Inicializar el formulario de pedido
@@ -283,46 +297,17 @@ function initializeOrderForm() {
       telefono: formData.get("telefono"),
       direccion: formData.get("direccion"),
       comentarios: formData.get("comentarios"),
-      items: JSON.parse(localStorage.getItem("carrito")) || [],
+      items: JSON.parse(localStorage.getItem("sushiCart")) || [],
       total: calcularTotal()
     };
 
-    // Crear mensaje de WhatsApp
-    const message = `¡Nuevo pedido de Jiao Sushi!%0A%0A` +
-      `Nombre: ${orderData.nombre}%0A` +
-      `Teléfono: ${orderData.telefono}%0A` +
-      `Dirección: ${orderData.direccion}%0A` +
-      `Comentarios: ${orderData.comentarios}%0A%0A` +
-      `Items:%0A${orderData.items.map(item => {
-        const producto = menuItems.find(p => String(p.id) === String(item.id));
-        return `- ${producto.nombre} x${item.cantidad} - $${producto.precio * item.cantidad}`;
-      }).join("%0A")}%0A%0A` +
-      `Total: $${orderData.total}`;
-
-    // Abrir WhatsApp con el mensaje
-    window.open(`https://wa.me/59899999999?text=${message}`, "_blank");
+    // Aquí puedes agregar la lógica para enviar el pedido
+    console.log("Pedido enviado:", orderData);
 
     // Limpiar el carrito
-    localStorage.removeItem("carrito");
+    localStorage.removeItem("sushiCart");
     
     // Redirigir a la página de inicio
-    window.location.href = `${getBasePath()}index.html`;
+    window.location.href = "index.html";
   });
-}
-
-function calcularTotal() {
-  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  let total = 0;
-
-  for (let i = 0; i < carrito.length; i++) {
-    const amount = Number(carrito[i].cantidad);
-    const producto = menuItems.find(
-      (p) => String(p.id) === String(carrito[i].id)
-    );
-
-    const price = producto.precio;
-    total += amount * price;
-  }
-
-  return total;
 }
