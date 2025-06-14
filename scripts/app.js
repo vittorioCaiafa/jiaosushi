@@ -1,6 +1,16 @@
 import { renderizarMenu } from "../data/menu.js";
 import { mostrarTotal, mostrarCarrito } from "./carrito.js";
 
+// Función para obtener la ruta base
+function getBasePath() {
+  // Si estamos en GitHub Pages, usamos /jiaosushi/
+  if (window.location.hostname === 'vittoriocaiafa.github.io') {
+    return '/jiaosushi/';
+  }
+  // Si estamos en localhost (Go Live), usamos la ruta relativa
+  return './';
+}
+
 // Función para cargar componentes
 async function loadComponent(elementId, componentPath) {
   try {
@@ -42,14 +52,14 @@ async function loadMenu() {
     }
 
     console.log("Importing menu data...");
-    const { menuItems } = await import("./data/menu.js");
+    const { menuItems } = await import("../data/menu.js");
     console.log("Menu data received:", menuItems);
 
     menuGrid.innerHTML = menuItems
       .map(
         (item) => `
         <div class="menu-card">
-          <img src="./jiaosushi/${item.imagen}" alt="${item.nombre}" />
+          <img src="${getBasePath()}${item.imagen}" alt="${item.nombre}" />
           <div class="menu-card-content">
             <h3>${item.nombre}</h3>
             <p>${item.descripcion}</p>
@@ -62,7 +72,7 @@ async function loadMenu() {
 
     // Agregar el botón de pedir después del grid
     const pedirButton = document.createElement("a");
-    pedirButton.href = "pedir.html";
+    pedirButton.href = `${getBasePath()}pedir.html`;
     pedirButton.className = "black-btn";
     pedirButton.style.marginTop = "50px";
     pedirButton.style.marginBottom = "100px";
@@ -207,7 +217,75 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log("Loading menu page...");
       await loadMenu();
     }
+
+    // Inicializar el formulario de pedido
+    initializeOrderForm();
   } catch (error) {
     console.error("Error loading components:", error);
   }
 });
+
+// Inicializar el formulario de pedido
+function initializeOrderForm() {
+  const orderForm = document.getElementById("order-form");
+  const sendButton = document.getElementById("btn-enviar");
+
+  if (!orderForm || !sendButton) return;
+
+  sendButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    
+    if (!orderForm.checkValidity()) {
+      orderForm.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(orderForm);
+    const orderData = {
+      nombre: formData.get("nombre"),
+      telefono: formData.get("telefono"),
+      direccion: formData.get("direccion"),
+      comentarios: formData.get("comentarios"),
+      items: JSON.parse(localStorage.getItem("carrito")) || [],
+      total: calcularTotal()
+    };
+
+    // Crear mensaje de WhatsApp
+    const message = `¡Nuevo pedido de Jiao Sushi!%0A%0A` +
+      `Nombre: ${orderData.nombre}%0A` +
+      `Teléfono: ${orderData.telefono}%0A` +
+      `Dirección: ${orderData.direccion}%0A` +
+      `Comentarios: ${orderData.comentarios}%0A%0A` +
+      `Items:%0A${orderData.items.map(item => {
+        const producto = menuItems.find(p => String(p.id) === String(item.id));
+        return `- ${producto.nombre} x${item.cantidad} - $${producto.precio * item.cantidad}`;
+      }).join("%0A")}%0A%0A` +
+      `Total: $${orderData.total}`;
+
+    // Abrir WhatsApp con el mensaje
+    window.open(`https://wa.me/59899999999?text=${message}`, "_blank");
+
+    // Limpiar el carrito
+    localStorage.removeItem("carrito");
+    
+    // Redirigir a la página de inicio
+    window.location.href = `${getBasePath()}index.html`;
+  });
+}
+
+function calcularTotal() {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let total = 0;
+
+  for (let i = 0; i < carrito.length; i++) {
+    const amount = Number(carrito[i].cantidad);
+    const producto = menuItems.find(
+      (p) => String(p.id) === String(carrito[i].id)
+    );
+
+    const price = producto.precio;
+    total += amount * price;
+  }
+
+  return total;
+}

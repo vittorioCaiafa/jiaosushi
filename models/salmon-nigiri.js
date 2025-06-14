@@ -4,5 +4,5 @@ export class SalmonNigiri {
   unidades = 2;
   descripcion = "Salmón fresco sobre arroz";
   precio = 200;
-  imagen = "./utils/images/sushi/salmon-nigiri.png";
+  imagen = "utils/images/sushi/salmon-nigiri.png";
 }

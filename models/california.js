@@ -4,5 +4,5 @@ export class California {
   unidades = 8;
   descripcion = "Cangrejo, palta, queso crema";
   precio = 350;
-  imagen = "./utils/images/sushi/california.png";
+  imagen = "utils/images/sushi/california.png";
 }
