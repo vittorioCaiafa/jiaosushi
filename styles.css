@@ -262,19 +262,21 @@ h2 {
   z-index: -1;
 }
 
-/* Estética moderna y limpia para el formulario y carrito */
+.order-section {
+  padding: 120px 20px 80px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
-.form-pedido-layout {
+.order-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 40px;
-  background: rgba(255, 255, 255, 0.75);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 1100px;
-  margin: auto;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
 }
 
 .order-form {
@@ -286,19 +288,49 @@ h2 {
 }
 
 .order-form input,
-.order-form select {
-  padding: 12px 15px;
+.order-form textarea {
+  width: 100%;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
-  background-color: #fafafa;
-  transition: box-shadow 0.3s ease;
+  transition: border-color 0.3s;
+}
+
+.order-form textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
 .order-form input:focus,
-.order-form select:focus {
+.order-form textarea:focus {
+  border-color: #000;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(222, 217, 188, 0.5);
+}
+
+#btn-enviar {
+  width: 100%;
+  padding: 12px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+}
+
+#btn-enviar:hover {
+  background-color: #333;
+}
+
+/* Estética moderna y limpia para el formulario y carrito */
+.form-pedido-layout {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+  margin: auto;
 }
 
 .pedido-lista {
@@ -332,10 +364,27 @@ h2 {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-#btn-enviar {
-  width: 100%;
-  max-width: 500px;
+.total {
   margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #eee;
+  font-weight: bold;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .order-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-form,
+  .order-summary {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* Mejorar el botón */
