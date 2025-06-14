@@ -21,28 +21,47 @@
       <div class="hero-content">
         <div class="hero-text">
           <h1>Jiao Sushi</h1>
-          <p>La mejor experiencia gastronómica japonesa en Uruguay desde tu casa</p>
+          <p>
+            La mejor experiencia gastronómica japonesa en Uruguay desde tu casa
+          </p>
           <a href="/jiaosushi/menu.html" class="black-btn">Ver Menú</a>
         </div>
         <div class="hero-features">
           <div class="feature">
-            <img src="/utils/images/icons/fresh.png" alt="Ingredientes frescos" />
+            <img
+              data-src-github="/jiaosushi/utils/images/icons/fresh.png"
+              data-src-local="/utils/images/icons/fresh.png"
+              alt="Ingredientes frescos"
+              class="dynamic-src"
+            />
             <h3>Fresco</h3>
           </div>
           <div class="feature">
-            <img src="/jiaosushi/utils/images/icons/chef.png" alt="Chef experto" />
+            <img
+              src="/jiaosushi/utils/images/icons/chef.png"
+              alt="Chef experto"
+            />
             <h3>Experto</h3>
           </div>
           <div class="feature">
-            <img src="/jiaosushi/utils/images/icons/delivery.png" alt="Entrega rápida" />
+            <img
+              src="/jiaosushi/utils/images/icons/delivery.png"
+              alt="Entrega rápida"
+            />
             <h3>Rápido</h3>
           </div>
           <div class="feature">
-            <img src="/jiaosushi/utils/images/icons/quality.png" alt="Calidad premium" />
+            <img
+              src="/jiaosushi/utils/images/icons/quality.png"
+              alt="Calidad premium"
+            />
             <h3>Premium</h3>
           </div>
           <div class="feature">
-            <img src="/jiaosushi/utils/images/icons/handmade.png" alt="Casero" />
+            <img
+              src="/jiaosushi/utils/images/icons/handmade.png"
+              alt="Casero"
+            />
             <h3>Casero</h3>
           </div>
           <div class="feature">
@@ -58,5 +77,19 @@
 
     <div id="message-button"></div>
     <div id="chat-modal"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll(".dynamic-src");
+        const isGitHubPages = window.location.hostname.includes("github.io");
+
+        images.forEach((img) => {
+          const src = isGitHubPages
+            ? img.dataset.srcGithub
+            : img.dataset.srcLocal;
+          img.src = src;
+        });
+      });
+    </script>
   </body>
 </html>
