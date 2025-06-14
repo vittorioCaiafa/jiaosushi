@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Mostrar el carrito si estamos en la página de pedido
-    if (window.location.pathname.includes("pedido.html")) {
+    if (window.location.pathname.includes("pedir.html")) {
       console.log("Loading order page...");
       const { mostrarCarrito, mostrarTotal } = await import("./carrito.js");
       // Esperar a que el DOM esté completamente cargado
