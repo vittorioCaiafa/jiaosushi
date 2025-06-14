@@ -327,9 +327,9 @@ h2 {
 
 /* Estética moderna y limpia para el formulario y carrito */
 .form-pedido-layout {
+  justify-content: center;
   display: flex;
-  justify-content: space-around;
-  padding: 50px;
+  padding: 20px;
   margin: auto;
 }
 
