@@ -6,6 +6,7 @@
     <title>Jiao Sushi | Menú</title>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./scripts/app.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
     <div class="background-image"></div>
@@ -14,6 +15,12 @@
 
     <section class="menu-section">
       <h2>Nuestro Menú</h2>
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="search-input" placeholder="Buscar sushi..." />
+        </div>
+      </div>
       <div class="menu-grid" id="menuGrid">
         <!-- Los items del menú se cargarán dinámicamente aquí -->
       </div>

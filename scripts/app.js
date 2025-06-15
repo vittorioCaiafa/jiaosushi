@@ -91,57 +91,19 @@ async function loadMenu() {
     const { menuItems } = await import("../data/menu.js");
     console.log("Menu data received:", menuItems);
 
-    menuGrid.innerHTML = menuItems
-      .map(
-        (item) => `
-        <div class="menu-card">
-          <div class="menu-card-image">
-            <img src="${getBasePath()}${item.imagen}" alt="${item.nombre}" />
-          </div>
-          <div class="menu-card-content">
-            <h3>${item.nombre}</h3>
-            <p class="menu-item-descrip">${item.descripcion}</p>
-            <span class="price">$${item.precio}</span>
-            <div class="menu-card-footer">
-              <div class="counter">
-                <button class="counter-btn minus" data-id="${item.id}">-</button>
-                <span class="counter-value" data-id="${item.id}">${getItemAmount(item.id)}</span>
-                <button class="counter-btn plus" data-id="${item.id}">+</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `
-      )
-      .join("");
-
-    // Add event listeners for counter buttons
-    const minusButtons = document.querySelectorAll('.counter-btn.minus');
-    const plusButtons = document.querySelectorAll('.counter-btn.plus');
-
-    minusButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const id = parseInt(button.dataset.id);
-        const valueElement = document.querySelector(`.counter-value[data-id="${id}"]`);
-        let value = parseInt(valueElement.textContent);
-        if (value > 0) {
-          value--;
-          valueElement.textContent = value;
-          updateCartItem(id, value);
-        }
+    // Add search functionality
+    const searchInput = document.getElementById("search-input");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredItems = menuItems.filter(item => 
+          item.nombre.toLowerCase().includes(searchTerm)
+        );
+        renderMenuItems(filteredItems);
       });
-    });
+    }
 
-    plusButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const id = parseInt(button.dataset.id);
-        const valueElement = document.querySelector(`.counter-value[data-id="${id}"]`);
-        let value = parseInt(valueElement.textContent);
-        value++;
-        valueElement.textContent = value;
-        updateCartItem(id, value);
-      });
-    });
+    renderMenuItems(menuItems);
 
     // Agregar el botón de pedir después del grid
     const pedirButton = document.createElement("a");
@@ -154,6 +116,63 @@ async function loadMenu() {
   } catch (error) {
     console.error("Error loading menu:", error);
   }
+}
+
+function renderMenuItems(items) {
+  const menuGrid = document.getElementById("menuGrid");
+  if (!menuGrid) return;
+
+  menuGrid.innerHTML = items
+    .map(
+      (item) => `
+      <div class="menu-card">
+        <div class="menu-card-image">
+          <img src="${getBasePath()}${item.imagen}" alt="${item.nombre}" />
+        </div>
+        <div class="menu-card-content">
+          <h3>${item.nombre}</h3>
+          <p class="menu-item-descrip">${item.descripcion}</p>
+          <span class="price">$${item.precio}</span>
+          <div class="menu-card-footer">
+            <div class="counter">
+              <button class="counter-btn minus" data-id="${item.id}">-</button>
+              <span class="counter-value" data-id="${item.id}">${getItemAmount(item.id)}</span>
+              <button class="counter-btn plus" data-id="${item.id}">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+
+  // Add event listeners for counter buttons
+  const minusButtons = document.querySelectorAll('.counter-btn.minus');
+  const plusButtons = document.querySelectorAll('.counter-btn.plus');
+
+  minusButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = parseInt(button.dataset.id);
+      const valueElement = document.querySelector(`.counter-value[data-id="${id}"]`);
+      let value = parseInt(valueElement.textContent);
+      if (value > 0) {
+        value--;
+        valueElement.textContent = value;
+        updateCartItem(id, value);
+      }
+    });
+  });
+
+  plusButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = parseInt(button.dataset.id);
+      const valueElement = document.querySelector(`.counter-value[data-id="${id}"]`);
+      let value = parseInt(valueElement.textContent);
+      value++;
+      valueElement.textContent = value;
+      updateCartItem(id, value);
+    });
+  });
 }
 
 async function initializeChat() {
