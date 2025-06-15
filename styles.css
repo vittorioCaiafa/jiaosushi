@@ -1544,7 +1544,7 @@ footer {
 }
 
 .auth-section {
-  padding: 120px 20px 80px;
+  padding: 20px 20px 20px;
   min-height: 100vh;
   display: flex;
   align-items: center;
