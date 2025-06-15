@@ -105,14 +105,14 @@ async function loadMenu() {
 
     renderMenuItems(menuItems);
 
-    // Agregar el botón de pedir después del grid
-    const pedirButton = document.createElement("a");
-    pedirButton.href = `${getBasePath()}pedir.html`;
-    pedirButton.className = "black-btn";
-    pedirButton.style.marginTop = "50px";
-    pedirButton.style.marginBottom = "100px";
-    pedirButton.textContent = "Pedir";
-    menuGrid.parentElement.appendChild(pedirButton);
+    // Add order button after the grid
+    const orderButton = document.createElement("a");
+    orderButton.href = `${getBasePath()}order.html`;
+    orderButton.className = "black-btn";
+    orderButton.style.marginTop = "50px";
+    orderButton.style.marginBottom = "100px";
+    orderButton.textContent = "Order";
+    menuGrid.parentElement.appendChild(orderButton);
   } catch (error) {
     console.error("Error loading menu:", error);
   }
@@ -277,8 +277,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       await loadMenu();
     }
 
-    // Mostrar el carrito si estamos en la página de pedido
-    if (window.location.pathname.includes("pedir.html")) {
+    // Show cart if we're on the order page
+    if (window.location.pathname.includes("order.html")) {
       console.log("Loading order page...");
       const { mostrarCarrito, mostrarTotal } = await import("./carrito.js");
       // Esperar a que el DOM esté completamente cargado

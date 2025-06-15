@@ -9,7 +9,7 @@
 body {
   font-family: "Montserrat", sans-serif;
   background-color: white;
-  color: #000000; /* Mejor contraste que blanco sobre blanco */
+  color: #000000; /* Mejor contrast than white over white */
   min-height: 100vh;
   position: relative;
 }
@@ -210,13 +210,6 @@ nav {
 
 .green-btn:hover {
   background-color: #1ebe57;
-}
-
-footer {
-  background-color: #beb1a4;
-  color: white;
-  padding: 40px 0 20px;
-  margin-top: 40px;
 }
 
 .footer-content {
@@ -430,7 +423,7 @@ h2 {
   background-color: #333;
 }
 
-/* Estética moderna y limpia para el formulario y carrito */
+/* Modern and clean aesthetics for form and cart */
 .form-pedido-layout {
   justify-content: center;
   display: flex;
@@ -492,7 +485,7 @@ h2 {
   }
 }
 
-/* Mejorar el botón */
+/* Mobile order button adjustments */
 .black-btn {
   background-color: #000000;
   color: white;
@@ -868,7 +861,7 @@ body {
 
 /* Enhanced Footer Styles */
 footer {
-  background: linear-gradient(to right, #2c3e50, #34495e);
+  background: linear-gradient(to right, #beb1a4, #c5bdb4);
   color: white;
   padding: 60px 20px;
   margin-top: 80px;
