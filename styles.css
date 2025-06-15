@@ -698,6 +698,10 @@ h2 {
     padding: 6px;
   }
 
+  .auth-links a {
+    margin-right: 0px;
+  }
+
   .section {
     padding: 60px 10px 30px;
   }
@@ -745,13 +749,6 @@ h2 {
     padding: 15px 30px;
     font-size: 18px;
     margin: 20px 0;
-  }
-}
-
-/* Fix for the background image on mobile */
-@media screen and (max-width: 768px) {
-  .background-image {
-    background-attachment: scroll;
   }
 }
 
@@ -932,6 +929,19 @@ footer {
 
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
+  .background-image {
+    background-attachment: scroll;
+  }
+
+  .menu-table td p:first-child {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .menu-item-descrip {
+    font-size: 13px;
+  }
+
   .comments-container {
     grid-template-columns: 1fr;
   }
@@ -967,18 +977,6 @@ footer {
   overflow-wrap: break-word;
   max-width: 100%;
   line-height: 1.4;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .menu-table td p:first-child {
-    font-size: 18px;
-    margin-bottom: 6px;
-  }
-
-  .menu-item-descrip {
-    font-size: 13px;
-  }
 }
 
 /* Mobile-specific styles */
