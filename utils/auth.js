@@ -1,6 +1,13 @@
 // Google OAuth Configuration
 const GOOGLE_CLIENT_ID = '328175434715-ak21d2likhuph5gk4unnrumcj4l6ekmq.apps.googleusercontent.com'; // You'll need to replace this with your actual Google Client ID
-const GOOGLE_REDIRECT_URI = window.location.origin + '/auth-callback.html';
+
+// Get the current origin and pathname
+const currentOrigin = window.location.origin;
+const currentPath = window.location.pathname;
+const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+
+// Construct the redirect URI
+const GOOGLE_REDIRECT_URI = `${currentOrigin}${basePath}auth-callback.html`;
 
 // OAuth endpoints
 const GOOGLE_AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -28,6 +35,8 @@ export function initGoogleAuth() {
 
 // Start Google OAuth flow
 export function startGoogleAuth() {
+  console.log('Redirect URI:', GOOGLE_REDIRECT_URI); // Debug log
+  
   const params = new URLSearchParams({
     client_id: GOOGLE_CLIENT_ID,
     redirect_uri: GOOGLE_REDIRECT_URI,
