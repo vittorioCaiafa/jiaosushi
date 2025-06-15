@@ -7,7 +7,7 @@ const currentPath = window.location.pathname;
 const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
 
 // Construct the redirect URI
-const GOOGLE_REDIRECT_URI = `${currentOrigin}${basePath}auth-callback.html`;
+const GOOGLE_REDIRECT_URI = `${getBasePath()}auth-callback.html`;
 
 // OAuth endpoints
 const GOOGLE_AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -39,7 +39,7 @@ export function startGoogleAuth() {
   
   const params = new URLSearchParams({
     client_id: GOOGLE_CLIENT_ID,
-    redirect_uri: GOOGLE_REDIRECT_URI,
+    redirect_uri: getGoogleRedirectUri(),
     response_type: 'token',
     scope: SCOPES,
     include_granted_scopes: 'true',
@@ -48,6 +48,10 @@ export function startGoogleAuth() {
 
   window.location.href = `${GOOGLE_AUTH_URL}?${params.toString()}`;
 }
+
+export function getGoogleRedirectUri() {
+    return `${getBasePath()}auth-callback.html`;
+  }  
 
 // Handle OAuth callback
 export function handleAuthCallback() {
@@ -83,10 +87,17 @@ export function isAuthenticated() {
 
 //function that 
 export function getBasePath() {
-  const currentPath = window.location.pathname;
-  const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-  return basePath;
-}
+    const origin = window.location.origin;
+    const path = window.location.pathname;
+  
+    if (origin.includes('github.io')) {
+      return `${origin}/jiaosushi/`;
+    } else {
+      const base = path.split('/').slice(0, -1).join('/') + '/';
+      return `${origin}${base}`;
+    }
+  }
+  
 
 // Get current user
 export function getCurrentUser() {
@@ -104,7 +115,7 @@ export function logout() {
 // Protect routes that require authentication
 export function requireAuth() {
   if (!isAuthenticated()) {
-    window.location.href = '/login.html';
+    window.location.href = `${getBasePath()}login.html`;
     return false;
   }
   return true;
