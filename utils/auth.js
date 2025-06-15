@@ -81,6 +81,13 @@ export function isAuthenticated() {
   return !!localStorage.getItem('accessToken');
 }
 
+//function that 
+export function getBasePath() {
+  const currentPath = window.location.pathname;
+  const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+  return basePath;
+}
+
 // Get current user
 export function getCurrentUser() {
   const user = localStorage.getItem('user');
