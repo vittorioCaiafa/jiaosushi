@@ -1,34 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jiao Sushi | Iniciar Sesión</title>
+    <title>Jiao Sushi | Login</title>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./scripts/app.js" defer></script>
   </head>
   <body>
     <div class="background-image"></div>
 
-    <div id="navbar"></div>
+    <div id="navbar-container"></div>
 
     <section class="auth-section">
       <div class="auth-container">
-        <h2>Iniciar Sesión</h2>
-        <form class="auth-form" id="login-form">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
+        <div class="auth-box">
+          <h2>Login</h2>
+          <form id="login-form" class="auth-form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" required />
+            </div>
+            <button type="submit" class="auth-btn">Login</button>
+          </form>
+          <div class="auth-divider">
+            <span>or</span>
           </div>
-          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" required />
-          </div>
-          <button type="submit" class="auth-btn">Iniciar Sesión</button>
-        </form>
-        <p class="auth-link">
-          Don't have an account? <a href="./signup.html">Sign Up</a>
-        </p>
+          <button id="google-login" class="google-btn">
+            <img src="./assets/google-icon.png" alt="Google" />
+            Continue with Google
+          </button>
+          <p class="auth-link">
+            Don't have an account? <a href="./signup.html">Sign Up</a>
+          </p>
+        </div>
       </div>
     </section>
 
@@ -36,5 +45,32 @@
 
     <div id="message-button"></div>
     <div id="chat-modal"></div>
+
+    <script type="module">
+      import { initGoogleAuth, startGoogleAuth } from './utils/auth.js';
+
+      // Initialize Google Auth
+      initGoogleAuth().then(() => {
+        const googleLoginBtn = document.getElementById('google-login');
+        googleLoginBtn.addEventListener('click', startGoogleAuth);
+      });
+
+      // Handle form login
+      const loginForm = document.getElementById('login-form');
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+          // Here you would typically make an API call to your backend
+          // For now, we'll just show an alert
+          alert('Regular login functionality will be implemented with backend integration');
+        } catch (error) {
+          console.error('Login error:', error);
+          alert('Login failed. Please try again.');
+        }
+      });
+    </script>
   </body>
 </html> 

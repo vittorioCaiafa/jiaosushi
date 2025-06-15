@@ -12,11 +12,19 @@
       </li>
     </ul>
     <ul class="auth-links">
-      <li>
+      <li id="auth-buttons">
+        <a href="./login.html">Login</a>
         <a href="./signup.html">Registrarse</a>
       </li>
-      <li>
-        <a href="./login.html">Iniciar sesión</a>
+      <li id="user-profile" style="display: none;">
+        <div class="user-menu">
+          <img id="user-avatar" src="" alt="Profile" class="user-avatar" />
+          <div class="user-dropdown">
+            <span id="user-name"></span>
+            <a href="./profile.html">Profile</a>
+            <button id="logout-btn">Logout</button>
+          </div>
+        </div>
       </li>
     </ul>
   </div>

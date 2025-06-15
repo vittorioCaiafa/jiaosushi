@@ -1,5 +1,6 @@
 import { renderizarMenu } from "../data/menu.js";
 import { mostrarTotal, mostrarCarrito } from "./carrito.js";
+import { isAuthenticated, getCurrentUser, logout } from '../utils/auth.js';
 
 // Función para obtener la ruta base
 function getBasePath() {
@@ -290,6 +291,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Inicializar el formulario de pedido
     initializeOrderForm();
+
+    // Update navbar based on auth state
+    updateNavbar();
   } catch (error) {
     console.error("Error loading components:", error);
   }
@@ -329,4 +333,29 @@ function initializeOrderForm() {
     // Redirigir a la página de inicio
     window.location.href = "index.html";
   });
+}
+
+// Update navbar based on auth state
+function updateNavbar() {
+  const authButtons = document.getElementById('auth-buttons');
+  const userProfile = document.getElementById('user-profile');
+  const userAvatar = document.getElementById('user-avatar');
+  const userName = document.getElementById('user-name');
+  const logoutBtn = document.getElementById('logout-btn');
+
+  if (isAuthenticated()) {
+    const user = getCurrentUser();
+    authButtons.style.display = 'none';
+    userProfile.style.display = 'block';
+    userAvatar.src = user.picture;
+    userName.textContent = user.name;
+    
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      logout();
+    });
+  } else {
+    authButtons.style.display = 'block';
+    userProfile.style.display = 'none';
+  }
 }
