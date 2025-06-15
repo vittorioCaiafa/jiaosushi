@@ -1049,34 +1049,44 @@ footer {
 
 @media (max-width: 768px) {
   .menu-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 15px;
   }
 
   .menu-card {
     flex-direction: column;
     height: auto;
-    max-width: 300px;
+    max-width: none;
   }
 
   .menu-card-image {
-    flex: 0 0 200px;
-    padding: 15px;
+    flex: 0 0 150px;
+    padding: 10px;
   }
 
   .menu-card-content {
-    padding: 15px;
+    padding: 10px;
   }
 
   .menu-card-content h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .menu-item-descrip {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .price {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px;
   }
 }
 
