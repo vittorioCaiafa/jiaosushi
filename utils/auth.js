@@ -98,7 +98,7 @@ export function getCurrentUser() {
 export function logout() {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('user');
-  window.location.href = '/';
+  window.location.href = getBasePath();
 }
 
 // Protect routes that require authentication
