@@ -19,10 +19,10 @@
         window.addEventListener('load', async () => {
             try {
                 await handleAuthCallback();
-                window.location.href = '/';
+                window.location.href = '/jiaosushi/';
             } catch (error) {
                 console.error('Authentication error:', error);
-                window.location.href = '/login.html?error=auth_failed';
+                window.location.href = '/jiaosushi/login.html?error=auth_failed';
             }
         });
     </script>
