@@ -472,19 +472,6 @@ h2 {
   justify-content: space-between;
 }
 
-@media (max-width: 768px) {
-  .order-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .order-form,
-  .order-summary {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
 /* Mobile order button adjustments */
 .black-btn {
   background-color: #000000;
@@ -1157,41 +1144,6 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 15px;
-  }
-
-  .menu-card {
-    flex-direction: column;
-    height: auto;
-    max-width: none;
-  }
-
-  .menu-card-image {
-    flex: 0 0 150px;
-    padding: 10px;
-  }
-
-  .menu-card-content {
-    padding: 10px;
-  }
-
-  .menu-card-content h3 {
-    font-size: 1rem;
-  }
-
-  .menu-item-descrip {
-    font-size: 0.8rem;
-  }
-
-  .price {
-    font-size: 1rem;
-  }
-}
-
 @media (max-width: 480px) {
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1292,34 +1244,6 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 3rem;
-  }
-
-  .hero-text p {
-    font-size: 1.2rem;
-  }
-
-  .hero-features {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .feature {
-    padding: 1rem;
-  }
-
-  .feature img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .feature h3 {
-    font-size: 1rem;
-  }
-}
-
 /* Floating Message Button */
 .floating-message {
   position: fixed;
@@ -1346,21 +1270,6 @@ footer {
 .floating-message img {
   width: 30px;
   height: 30px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .floating-message {
-    width: 50px;
-    height: 50px;
-    bottom: 20px;
-    right: 20px;
-  }
-
-  .floating-message img {
-    width: 25px;
-    height: 25px;
-  }
 }
 
 /* Chat Modal */
@@ -1476,17 +1385,6 @@ footer {
   background: #333;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .chat-modal {
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    right: 0;
-    border-radius: 0;
-  }
-}
-
 .auth-links a {
   text-decoration: none;
   color: #beb1a4;
@@ -1517,16 +1415,6 @@ footer {
 /* Remove underline effect for signup button */
 .auth-links li:last-child::after {
   display: none;
-}
-
-@media (max-width: 768px) {
-  .auth-links a {
-    font-size: 13px !important;
-  }
-
-  .auth-links a[href="./signup.html"] {
-    font-size: 13px !important;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1688,22 +1576,6 @@ footer {
 
 #search-input::placeholder {
   color: #beb1a4;
-}
-
-@media (max-width: 768px) {
-  .search-container {
-    padding: 0 15px;
-  }
-
-  #search-input {
-    padding: 12px 12px 12px 40px;
-    font-size: 14px;
-  }
-
-  .search-icon {
-    font-size: 16px;
-    left: 12px;
-  }
 }
 
 @media (max-width: 480px) {
