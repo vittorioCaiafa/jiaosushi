@@ -112,7 +112,7 @@ async function loadMenu() {
     orderButton.className = "black-btn";
     orderButton.style.marginTop = "50px";
     orderButton.style.marginBottom = "100px";
-    orderButton.textContent = "Order";
+    orderButton.textContent = "Pedir";
     menuGrid.parentElement.appendChild(orderButton);
   } catch (error) {
     console.error("Error loading menu:", error);
