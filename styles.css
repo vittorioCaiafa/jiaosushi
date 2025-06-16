@@ -1282,10 +1282,6 @@ footer {
     gap: 2rem;
   }
 
-  .hero-text {
-    text-align: center;
-  }
-
   .hero-text p {
     margin: 0 auto 2rem;
   }
@@ -1306,7 +1302,7 @@ footer {
   }
 
   .hero-features {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
